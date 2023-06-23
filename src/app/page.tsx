@@ -1,7 +1,10 @@
 export default function Home() {
   return (
-    <main className="flex flex-col items-center">
-      <h1 className="text-6xl font-bold text-center">Editar</h1>
-    </main>
+    <div className="flex items-center justify-between w-full -mb-5">
+      <h2 className="text-2xl font-bold prose dark:prose-invert xl:text-3xl">
+        Destacado
+      </h2>
+      <a href="">Tags</a>
+    </div>
   )
 }

@@ -6,7 +6,7 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col items-center w-11/12 max-w-2xl gap-10 py-12 mx-auto bg-indigo-600">
+    <div className="flex flex-col items-center w-11/12 max-w-2xl gap-10 py-12 mx-auto">
       <Header />
       {children}
     </div>
