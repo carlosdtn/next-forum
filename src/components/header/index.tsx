@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Search, Menu } from "iconoir-react"
 
 const Header = () => {
   return (
@@ -7,13 +6,6 @@ const Header = () => {
       <Link href="/">
         <div className="w-6 h-6 bg-black"></div>
       </Link>
-      {/* <div>
-        <Menu color="gray" width={20} height={20} />
-      </div> */}
-
-      <div className="flex items-center justify-center w-8 h-8 bg-white border rounded-full border-gray-500/60">
-        <Search color="gray" width={16} height={16} />
-      </div>
     </header>
   )
 }
