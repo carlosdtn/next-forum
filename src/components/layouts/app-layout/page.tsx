@@ -1,9 +1,16 @@
+import Header from "@/components/header"
+
 interface AppLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-const Layout = ({ children }: AppLayoutProps) => {
-  return <div className="flex">{children}</div>;
-};
+const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+  return (
+    <div className="flex flex-col items-center w-11/12 max-w-2xl gap-10 py-12 mx-auto bg-indigo-600">
+      <Header />
+      {children}
+    </div>
+  )
+}
 
-export default Layout;
+export default AppLayout
