@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Search, Menu } from "iconoir-react"
+import { Search } from "lucide-react"
 
 const Header = () => {
   return (
@@ -12,7 +12,7 @@ const Header = () => {
       </div> */}
 
       <div className="flex items-center justify-center w-8 h-8 bg-white border rounded-full border-gray-500/60">
-        <Search color="gray" width={16} height={16} />
+        <Search color="gray" width={16} size={16} />
       </div>
     </header>
   )
