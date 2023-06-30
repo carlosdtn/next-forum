@@ -2,7 +2,7 @@ const RULES = {
   OFF: "off",
   ERROR: "error",
   WARN: "warn",
-};
+}
 
 module.exports = {
   env: {
@@ -13,5 +13,6 @@ module.exports = {
   extends: "next/core-web-vitals",
   rules: {
     "react/prop-types": RULES.OFF,
+    semi: [RULES.ERROR, "never"],
   },
-};
+}
