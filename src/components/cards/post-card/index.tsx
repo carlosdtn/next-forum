@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-interface IPost {
+export interface IPost {
   id: number
   Categoria: string
   Contenido: string
@@ -8,9 +8,25 @@ interface IPost {
   UrlImagen: string
   fechaActualizacion: string
   fechaCreacion: string
+  CreadoPor: User
+  Comentarios?: Comentarios[]
+  Reacciones: Reacciones
 }
-
-interface IPostCardProps {
+export interface Comentarios {
+  Contenido: string
+  CreadoPor: User
+  fechaCreacion: string
+}
+export interface Reacciones {
+  likes: number
+  dislikes: number
+}
+export interface User {
+  id: number
+  Nombre: string
+  Avatar: string
+}
+export interface IPostCardProps {
   post: IPost
 }
 
