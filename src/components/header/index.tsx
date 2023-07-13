@@ -10,7 +10,7 @@ const Header = () => {
           width={38}
           height={38}
           stroke="currentColor"
-          stroke-width="3"
+          strokeWidth="3"
         />
       </div>
       <Link href="/">
