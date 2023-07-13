@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.myimage {
+  shape-outside: image();
+  shape-image-threshold: 0.5;
+  max-width: 100%;
+  height: auto;
+}
