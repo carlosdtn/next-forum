@@ -47,9 +47,9 @@ const TagSection: React.FC<Props> = ({ loading, tag }) => {
       loading={loading}
       content={
         <SectionHeader
-          name={tag?.name}
-          description={tag?.description}
-          avatar={tag?.avatar}
+          name={tag?.data.nombre}
+          description={tag?.data.descripcion}
+          avatar={tag?.data.imagen}
           loading={loading}
         />
       }

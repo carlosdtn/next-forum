@@ -39,13 +39,13 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
     <Link href={`/posts/${id}`}>
       <div className="relative flex flex-col justify-center w-full gap-5 px-10 py-5 border-2 cursor-pointer rounded-xl shadow-3xl transition-border hover:shadow-4xl border-zinc-700/90 bg-amber-100 hover:border-zinc-500">
         <div>
-          <div className="flex w-full gap-4 border-2 rounded-lg shadow-sm border-neutral-700 bg-white">
+          <div className="flex w-full gap-4 bg-white border-2 rounded-lg shadow-sm border-neutral-700">
             <div className="relative flex-shrink-0 group">
               <Image
                 alt="Imagen"
                 width={200}
                 height={200}
-                src={post.urlImagen}
+                src={post?.urlImagen}
                 className="flex-shrink-0 object-cover rounded-l-lg aspect-square w-28 sm:w-36"
               />
             </div>
@@ -70,7 +70,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
           </div>
         </div>
         <div className="absolute flex flex-col gap-3 -left-1 top-3 sm:-left-3">
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 bg-teal-900 border rounded-md shadow-md border-emerald-500/20">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -85,7 +85,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
             </svg>
             <p className="text-emerald-500">1</p>
           </div>
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 bg-teal-900 border rounded-md shadow-md border-emerald-500/20">
             <svg
               stroke="currentColor"
               fill="currentColor"
