@@ -6,10 +6,12 @@ import { MOCK_POSTS, MOCK_TAGS } from "@/lib/mock"
 import { useEffect, useState } from "react"
 import getAllDocuments from "@/firebase/getData"
 import { set } from "react-hook-form"
+import TagSectionSkeleton from "@/skeleton/tag-section-skeleton"
 
 export default function Home() {
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
+  const [loadingTag, setLoadingTag] = useState(true)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,8 +26,12 @@ export default function Home() {
 
   const fetchCategory = async () => {
     const tags = await getAllDocuments("Category")
-    console.log(tags)
-    setTags(tags)
+    if (!tags) {
+      setLoadingTag(true)
+    } else {
+      setLoadingTag(false)
+      setTags(tags)
+    }
 
     // if (error) {
     //   console.error("Error al obtener el documento:", error)
@@ -51,13 +57,18 @@ export default function Home() {
             Destacado
           </h2>
           <Button variant="primary" size="sm">
-            Tags
+            Etiquetas
           </Button>
         </div>
-        <div className="flex flex-col gap-6">
-          {tags.map((tag, index) => (
-            <TagSection key={index} loading={false} tag={tag} />
-          ))}
+        <div className="flex flex-col w-full gap-6">
+          {loadingTag
+            ? //made a array prototipe from tagsection skeleton
+              [...Array(7)].map((_, index) => (
+                <TagSectionSkeleton key={index} />
+              ))
+            : tags.map((tag, index) => (
+                <TagSection key={index} loading={false} tag={tag} />
+              ))}
         </div>
       </div>
       <div className="flex flex-col items-center justify-between w-full mt-5 -mb-5">

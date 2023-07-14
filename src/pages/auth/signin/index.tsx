@@ -11,11 +11,15 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/router"
 import signIn from "@/firebase/auth/signin"
 import { CredentialsProps } from "@/utils/types"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Signin = () => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const router = useRouter()
+  const notifySignIn = () =>
+    toast.error("Credenciales incorrectas", { theme: "colored" })
 
   const { register, handleSubmit } = useForm<CredentialsProps>()
 
@@ -30,7 +34,7 @@ const Signin = () => {
     const { result, error } = await signIn(email, password)
 
     if (error) {
-      return console.log(error)
+      return notifySignIn()
     }
     console.log(result)
     return router.push("/")
@@ -38,6 +42,7 @@ const Signin = () => {
 
   return (
     <div className="flex flex-col justify-between p-2 rounded-xl w-72">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center gap-y-2">
         <Logo />
         <h2 className="pr-1 text-2xl font-bold text-white">Inicia sesión</h2>

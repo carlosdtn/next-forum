@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/FileInput.jsx",
-    "src/firebase/getData.js"
+    "src/firebase/getData.js",
+    "src/context/AuthContext.jsx"
   ],
   "exclude": ["node_modules"]
 }

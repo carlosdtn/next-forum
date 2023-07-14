@@ -16,11 +16,10 @@ type TitleProps = {
 const SectionHeader = ({ name, description, avatar, loading }: TitleProps) => {
   return (
     <div className="flex items-center w-full gap-2">
-      <Image
+      <img
         src={avatar}
-        width={120}
-        height={120}
-        className="flex-shrink-0 w-20 h-20 rounded-full sm:h-24 sm:w-24"
+        quality={100}
+        className="w-16 h-16 rounded-full"
         alt={`${name} avatar`}
       />
       <div className="px-4">

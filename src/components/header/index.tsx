@@ -1,8 +1,16 @@
 import Link from "next/link"
 import { Search, Menu } from "lucide-react"
 import Logo from "@/components/logo"
+import { useState } from "react"
 
-const Header = () => {
+type Props = {
+  isOpen: boolean
+  setIsOpen: (open: boolean) => void
+}
+
+const Header: React.FC<Props> = ({ isOpen, setIsOpen }) => {
+  // const [isOpen, setIsOpen] = useState(false)
+
   return (
     <header className="relative flex items-center justify-between w-full h-10 gap-2">
       <div>
@@ -12,6 +20,8 @@ const Header = () => {
           height={38}
           stroke="currentColor"
           strokeWidth="3"
+          onClick={() => setIsOpen(!isOpen)}
+          className="cursor-pointer"
         />
       </div>
       <Link href="/">
