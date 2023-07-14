@@ -24,7 +24,7 @@ const Post = () => {
   }
 
   return (
-    <div className="flex flex-col relative gap-3 shadow p-4 w-full max-w-7xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 rounded">
+    <div className="flex flex-col relative gap-3 shadow p-4 w-full max-w-7xl border border-slate-200 bg-slate-100rounded">
       <div className="flex flex-row items-center gap-4">
         <h1 className="text-2xl font-extrabold text-slate-800">
           {" "}
@@ -66,12 +66,12 @@ const Post = () => {
             }}
             title="Like this post"
             aria-label="Like this post"
-            className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2"
           >
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 1024 1024"
               className={isLiked === 1 ? "text-blue-700" : "text-white"}
               height="22"
@@ -91,12 +91,12 @@ const Post = () => {
             }}
             title="Dislike this post"
             aria-label="Dislike this post"
-            className="flex gap-2  rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2  rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2"
           >
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 1024 1024"
               className={isLiked === -1 ? "text-blue-700" : "text-white"}
               height="22"
@@ -117,12 +117,12 @@ const Post = () => {
           }}
           title="Favorite this post"
           aria-label="Favorite this post"
-          className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2 relative right-6"
+          className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2 relative right-6"
         >
           <svg
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 1024 1024"
             className={isFavorite ? "text-pink-600" : "text-white"}
             height="22"

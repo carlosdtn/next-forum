@@ -57,7 +57,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
                 </p>
               </div>
               <a
-                className="mt-1 text-sm underline word-break-word line-clamp-1 text-emerald-700 dark:text-emerald-500"
+                className="mt-1 text-sm underline word-break-word line-clamp-1 text-emerald-700"
                 target="_blank"
                 rel="noreferrer"
                 href={post.UrlImagen}
@@ -68,7 +68,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
           </div>
         </div>
         <div className="absolute flex flex-col gap-3 -left-1 top-3 sm:-left-3">
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 dark:bg-teal-900">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -83,7 +83,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
             </svg>
             <p className="text-emerald-500">1</p>
           </div>
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 dark:bg-teal-900">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20">
             <svg
               stroke="currentColor"
               fill="currentColor"
