@@ -17,7 +17,7 @@ const Header = () => {
       <Link href="/">
         <Logo />
       </Link>
-      <div className="flex items-center justify-center w-10 h-10 bg-black border rounded-full border-gray-500/60">
+      <div className="flex items-center justify-center w-10 h-10 border rounded-full border-gray-500/60">
         <Search color="gray" width={18} size={18} />
       </div>
     </header>

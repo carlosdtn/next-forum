@@ -42,30 +42,37 @@ const Signin = () => {
         <Logo />
         <h2 className="pr-1 text-2xl font-bold text-white">Inicia sesión</h2>
       </div>
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col mt-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label className="text-white">
-            Usuario
-            <Input
-              className="text-black"
-              type="text"
-              {...register("username")}
-            />
-          </label>
-
-          <label className="text-white">
-            Contraseña
-            <Input
-              className="text-black"
-              type="password"
-              {...register("password")}
-            />
-          </label>
-          <Button type="submit">Continuar</Button>
+          <div className="flex flex-col gap-y-2">
+            <label className="text-white">
+              Usuario
+              <Input
+                className="text-white bg-transparent"
+                type="text"
+                {...register("username")}
+              />
+            </label>
+            <label className="text-white">
+              Contraseña
+              <Input
+                className="text-white bg-transparent"
+                type="password"
+                {...register("password")}
+              />
+            </label>
+          </div>
+          <Button
+            className="w-full mt-4 text-black bg-white hover:bg-white/80"
+            variant="icon"
+            type="submit"
+          >
+            Continuar
+          </Button>
         </form>
       </div>
-      <Separator />
-      <div className="flex flex-col justify-center mt-8 gap-y-4">
+      <hr className="my-5 h-0.5 border-t bg-neutral-100 opacity-100 dark:opacity-50" />
+      <div className="flex flex-col justify-center mt-2 gap-y-4">
         <ButtonWithIcon variant="icon" size="default">
           <GoogleLogo className="w-6 h-6 mr-2" />
           Continuar con Google

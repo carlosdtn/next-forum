@@ -3,10 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 export interface IPost {
   id: number
-  Categoria: string
-  Contenido: string
-  Titulo: string
-  UrlImagen: string
+  categoria: string
+  contenido: string
+  titulo: string
+  urlImagen: string
   fechaActualizacion: string
   fechaCreacion: string
   CreadoPor: User
@@ -14,8 +14,8 @@ export interface IPost {
   Reacciones: Reacciones
 }
 export interface Comentarios {
-  Contenido: string
-  CreadoPor: User
+  contenido: string
+  creadoPor: User
   fechaCreacion: string
 }
 export interface Reacciones {
@@ -24,8 +24,8 @@ export interface Reacciones {
 }
 export interface User {
   id: number
-  Nombre: string
-  Avatar: string
+  nombre: string
+  avatar: string
 }
 export interface IPostCardProps {
   post: IPost
@@ -33,35 +33,36 @@ export interface IPostCardProps {
 
 const PostCard: React.FC<IPostCardProps> = ({ post }) => {
   const id = post.id
+  console.log({ post })
 
   return (
     <Link href={`/posts/${id}`}>
-      <div className="relative flex flex-col justify-center w-full gap-5 px-10 py-5 border-2 cursor-pointer rounded-xl shadow-3xl transition-borderAndShadow hover:shadow-4xl border-zinc-700/90 bg-zinc-800/70 hover:border-zinc-500">
+      <div className="relative flex flex-col justify-center w-full gap-5 px-10 py-5 border-2 cursor-pointer rounded-xl shadow-3xl transition-border hover:shadow-4xl border-zinc-700/90 bg-amber-100 hover:border-zinc-500">
         <div>
-          <div className="flex w-full gap-4 border-2 rounded-lg shadow-sm border-neutral-700 bg-zinc-900">
+          <div className="flex w-full gap-4 border-2 rounded-lg shadow-sm border-neutral-700 bg-white">
             <div className="relative flex-shrink-0 group">
               <Image
                 alt="Imagen"
                 width={200}
                 height={200}
-                src={"https://picsum.photos/200"}
+                src={post.urlImagen}
                 className="flex-shrink-0 object-cover rounded-l-lg aspect-square w-28 sm:w-36"
               />
             </div>
             <div className="flex flex-col justify-between w-full py-3 pr-2">
               <div className="w-full">
                 <p className="font-bold word-break-word line-clamp-1">
-                  {post.Titulo}
+                  {post.titulo}
                 </p>
                 <p className="text-sm word-break-word line-clamp-2 sm:line-clamp-3">
-                  {post.Contenido}
+                  {post.contenido}
                 </p>
               </div>
               <a
-                className="mt-1 text-sm underline word-break-word line-clamp-1 text-emerald-700 dark:text-emerald-500"
+                className="mt-1 text-sm underline word-break-word line-clamp-1 text-emerald-700 text-emerald-500"
                 target="_blank"
                 rel="noreferrer"
-                href={post.UrlImagen}
+                href={post.urlImagen}
               >
                 Ver imagen
               </a>
@@ -69,7 +70,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
           </div>
         </div>
         <div className="absolute flex flex-col gap-3 -left-1 top-3 sm:-left-3">
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 dark:bg-teal-900">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 bg-teal-900">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -84,7 +85,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
             </svg>
             <p className="text-emerald-500">1</p>
           </div>
-          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 dark:bg-teal-900">
+          <div className="flex flex-col items-center gap-2 p-1 bg-teal-100 border rounded-md shadow-md border-emerald-500/20 bg-teal-900">
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -100,31 +101,28 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
             <p className="text-emerald-500">0</p>
           </div>
         </div>
-        <h2 className="text-2xl font-bold prose word-break-word dark:prose-invert">
-          {post.Titulo}
+        <h2 className="text-2xl font-bold prose word-break-word prose-invert">
+          {post.titulo}
         </h2>
-        <div className="overflow-hidden prose content-mask line-clamp-4 max-h-56 text-ellipsis prose-headings:text-base prose-code:text-xs markdown__content word-break-word prose-emerald dark:prose-invert dark:prose-hr:border-neutral-700">
-          <pre>
-            <code>{"console.log('Hello Developers!');"}</code>
-          </pre>
-          <p>{post.Contenido}</p>
+        <div className="overflow-hidden prose content-mask line-clamp-4 max-h-56 text-ellipsis prose-headings:text-base prose-code:text-xs markdown__content word-break-word prose-emerald prose-invert prose-hr:border-neutral-700">
+          <p>{post.contenido}</p>
         </div>
         <div className="flex items-center justify-between w-full mt-2">
           <div className="flex flex-wrap gap-2 mt-2 ">
             <a className="" href={`/posts/tags/#`}>
               <span
                 role="link"
-                className="flex cursor-pointer select-none items-center whitespace-nowrap rounded-md border-[1px] border-neutral-300 p-2 text-sm transition dark:border-neutral-800 dark:text-neutral-200 bg-emerald-500 dark:bg-teal-900 text-white border-none hover:opacity-80 px-2 py-1 "
+                className="flex cursor-pointer select-none items-center whitespace-nowrap rounded-md border-[1px] border-neutral-300 p-2 text-sm transition border-neutral-800 text-neutral-200 bg-emerald-500 bg-teal-900 text-white border-none hover:opacity-80 px-2 py-1 "
                 data-state="closed"
               >
-                {post.Categoria}
+                {post.categoria}
               </span>
             </a>
           </div>
           <p className="mt-2 ml-2 text-xs min-w-min sm:text-sm">
             by{" "}
             <a
-              className="font-bold underline text-emerald-600 dark:text-emerald-500"
+              className="font-bold underline text-emerald-600 text-emerald-500"
               href="/users/cliuk3v4x0000l40frpfipa3q"
             >
               @next-forum

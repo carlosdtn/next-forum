@@ -88,7 +88,7 @@ const MarkdownEditor: React.FC<Props> = ({
             }
             defaultValue={defaultValue}
             placeholder={placeholder}
-            className="dark:md-dark-mode"
+            className="md-dark-mode"
             shortcuts
             htmlClass="html-section"
             renderHTML={(text) => mdParser.parse(text)}
