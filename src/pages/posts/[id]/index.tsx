@@ -1,7 +1,6 @@
-"use client"
 import { IPost } from "@/components/cards/post-card"
 import { MOCK_POSTS } from "@/lib/mock"
-import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -9,7 +8,7 @@ const Post = () => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isLiked, setIsLiked] = useState(0)
 
-  const id = usePathname().split("/")[2]
+  const id = useRouter().query.id
   const post: IPost | null =
     MOCK_POSTS.find((post) => post.id === Number(id)) ?? null
 
@@ -24,13 +23,13 @@ const Post = () => {
   }
 
   return (
-    <div className="flex flex-col relative gap-3 shadow p-4 w-full max-w-7xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 rounded">
+    <div className="relative flex flex-col w-full gap-3 p-4 border rounded shadow max-w-7xl border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
       <div className="flex flex-row items-center gap-4">
         <h1 className="text-2xl font-extrabold text-slate-800">
           {" "}
           {post?.Titulo}{" "}
         </h1>
-        <div className="px-4 py-1 text-slate-100 font-light text-xs bg-green-500 rounded">
+        <div className="px-4 py-1 text-xs font-light bg-green-500 rounded text-slate-100">
           {post?.Categoria}
         </div>
       </div>
@@ -40,13 +39,13 @@ const Post = () => {
           width={80}
           height={80}
           src={post?.CreadoPor.Avatar ?? "https://i.pravatar.cc/200"}
-          className="flex-shrink-0 object-cover rounded-full aspect-square border-slate-700 shadow"
+          className="flex-shrink-0 object-cover rounded-full shadow aspect-square border-slate-700"
         />
-        <p className="text-slate-800 text-base">{post?.CreadoPor.Nombre} </p>
-        <p className="text-slate-600 text-base italic">{timeAgo} </p>
+        <p className="text-base text-slate-800">{post?.CreadoPor.Nombre} </p>
+        <p className="text-base italic text-slate-600">{timeAgo} </p>
       </div>
       <div className="flex max-h-[500px] overflow-y-auto mb-4 px-4">
-        <p className="text-slate-800 font-normal text-base">
+        <p className="text-base font-normal text-slate-800">
           {post?.Contenido}
         </p>
         <Image
@@ -58,7 +57,7 @@ const Post = () => {
         />
       </div>
 
-      <div className="absolute -bottom-5 flex flex-row justify-between w-full">
+      <div className="absolute flex flex-row justify-between w-full -bottom-5">
         <div className="flex flex-row gap-2">
           <button
             onClick={() => {
@@ -66,7 +65,7 @@ const Post = () => {
             }}
             title="Like this post"
             aria-label="Like this post"
-            className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -91,7 +90,7 @@ const Post = () => {
             }}
             title="Dislike this post"
             aria-label="Dislike this post"
-            className="flex gap-2  rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -117,7 +116,7 @@ const Post = () => {
           }}
           title="Favorite this post"
           aria-label="Favorite this post"
-          className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 dark:bg-teal-900 sm:p-2 relative right-6"
+          className="relative flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2 right-6"
         >
           <svg
             stroke="currentColor"

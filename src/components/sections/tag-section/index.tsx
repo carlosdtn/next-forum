@@ -23,8 +23,8 @@ const SectionHeader = ({ name, description, avatar, loading }: TitleProps) => {
         className="h-16 w-16 flex-shrink-0 rounded-full xs:h-[60px] xs:w-[60px]"
         alt={`${name} avatar`}
       />
-      <div>
-        <h2 className="text-xl prose line-clamp-1 text-ellipsis prose-invert xs:text-2xl">
+      <div className="px-4">
+        <h2 className="text-xl font-semibold prose text-white line-clamp-1 text-ellipsis prose-invert xs:text-2xl">
           {name}
         </h2>
         <p className="text-sm leading-5 line-clamp-2 text-ellipsis text-zinc-400 xs:text-base">
@@ -45,7 +45,7 @@ const TagSection: React.FC<Props> = ({ loading, tag }) => {
   return (
     <Section
       loading={loading}
-      title={
+      content={
         <SectionHeader
           name={tag?.name}
           description={tag?.description}

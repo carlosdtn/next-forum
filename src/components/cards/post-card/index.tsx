@@ -1,3 +1,4 @@
+"use-client"
 import Image from "next/image"
 import Link from "next/link"
 export interface IPost {
@@ -35,7 +36,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
 
   return (
     <Link href={`/posts/${id}`}>
-      <article className="relative flex flex-col justify-center w-full gap-5 px-10 py-5 border-2 cursor-pointer rounded-xl shadow-3xl transition-borderAndShadow hover:shadow-4xl border-zinc-700/90 bg-zinc-800/70 hover:border-zinc-500">
+      <div className="relative flex flex-col justify-center w-full gap-5 px-10 py-5 border-2 cursor-pointer rounded-xl shadow-3xl transition-borderAndShadow hover:shadow-4xl border-zinc-700/90 bg-zinc-800/70 hover:border-zinc-500">
         <div>
           <div className="flex w-full gap-4 border-2 rounded-lg shadow-sm border-neutral-700 bg-zinc-900">
             <div className="relative flex-shrink-0 group">
@@ -130,7 +131,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
             </a>
           </p>
         </div>
-      </article>
+      </div>
     </Link>
   )
 }
