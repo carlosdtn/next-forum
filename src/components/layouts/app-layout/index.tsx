@@ -19,9 +19,8 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
   return (
     <>
-      {user.providerId ? (
+      {user?.providerId ? (
         <>
-          {/* <Sidebar/> */}
           <div className="flex flex-col items-center w-11/12 max-w-2xl gap-10 py-12 mx-auto">
             <Header />
             {children}
