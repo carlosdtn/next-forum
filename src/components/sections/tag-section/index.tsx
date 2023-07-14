@@ -18,16 +18,16 @@ const SectionHeader = ({ name, description, avatar, loading }: TitleProps) => {
     <div className="flex items-center w-full gap-2">
       <Image
         src={avatar}
-        width={60}
-        height={60}
-        className="h-16 w-16 flex-shrink-0 rounded-full xs:h-[60px] xs:w-[60px]"
+        width={120}
+        height={120}
+        className="flex-shrink-0 w-20 h-20 rounded-full sm:h-24 sm:w-24"
         alt={`${name} avatar`}
       />
-      <div>
-        <h2 className="text-xl prose line-clamp-1 text-ellipsis prose-invert xs:text-2xl">
+      <div className="px-4">
+        <h2 className="text-xl font-semibold prose line-clamp-1 text-ellipsis prose-invert xs:text-2xl">
           {name}
         </h2>
-        <p className="text-sm leading-5 line-clamp-2 text-ellipsis text-zinc-400 xs:text-base">
+        <p className="text-sm leading-5 line-clamp-2 text-ellipsis xs:text-base">
           {description}
         </p>
       </div>
@@ -45,7 +45,7 @@ const TagSection: React.FC<Props> = ({ loading, tag }) => {
   return (
     <Section
       loading={loading}
-      title={
+      content={
         <SectionHeader
           name={tag?.name}
           description={tag?.description}

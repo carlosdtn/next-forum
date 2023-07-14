@@ -1,17 +1,29 @@
-"use client"
 import { IPost } from "@/components/cards/post-card"
 import { MOCK_POSTS } from "@/lib/mock"
-import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Post = () => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isLiked, setIsLiked] = useState(0)
+  const [post, setPost] = useState<IPost | null>(null)
 
-  const id = usePathname().split("/")[2]
-  const post: IPost | null =
-    MOCK_POSTS.find((post) => post.id === Number(id)) ?? null
+  const id = useRouter().query.id
+  console.log({ id })
+
+  useEffect(() => {
+    if (!id) return
+    const fetchPost = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NGROK_URL}/Posts/${id}`
+      )
+      const json = await res.json()
+      console.log({ json })
+      setPost(json.data[0])
+    }
+    fetchPost()
+  }, [id])
 
   const rtf = new Intl.RelativeTimeFormat("es", { style: "long" })
   let timeAgo = "-"
@@ -26,12 +38,9 @@ const Post = () => {
   return (
     <div className="flex flex-col relative gap-3 shadow p-4 w-full max-w-7xl border border-slate-200 bg-slate-100rounded">
       <div className="flex flex-row items-center gap-4">
-        <h1 className="text-2xl font-extrabold text-slate-800">
-          {" "}
-          {post?.Titulo}{" "}
-        </h1>
-        <div className="px-4 py-1 text-slate-100 font-light text-xs bg-green-500 rounded">
-          {post?.Categoria}
+        <h1 className="text-2xl font-extrabold"> {post?.titulo} </h1>
+        <div className="px-4 py-1 text-xs font-light bg-green-500 rounded">
+          {post?.categoria}
         </div>
       </div>
       <div className="flex flex-row items-center gap-3 ">
@@ -39,26 +48,24 @@ const Post = () => {
           alt="Imagen"
           width={80}
           height={80}
-          src={post?.CreadoPor.Avatar ?? "https://i.pravatar.cc/200"}
-          className="flex-shrink-0 object-cover rounded-full aspect-square border-slate-700 shadow"
+          src={post?.CreadoPor?.avatar ?? "https://i.pravatar.cc/200"}
+          className="flex-shrink-0 object-cover rounded-full shadow aspect-square border-slate-700"
         />
-        <p className="text-slate-800 text-base">{post?.CreadoPor.Nombre} </p>
-        <p className="text-slate-600 text-base italic">{timeAgo} </p>
+        <p className="text-base">{post?.CreadoPor?.nombre} </p>
+        <p className="text-base italic">{timeAgo} </p>
       </div>
-      <div className="flex max-h-[500px] overflow-y-auto mb-4 px-4">
-        <p className="text-slate-800 font-normal text-base">
-          {post?.Contenido}
-        </p>
+      <div className="flex max-h-[500px] justify-between overflow-y-auto mb-4 px-4">
+        <p className="text-base font-normal">{post?.contenido}</p>
         <Image
           alt="Imagen"
-          width={500}
-          height={500}
-          src={post?.UrlImagen ?? "https://picsum.photos/seed/picsum/200/300"}
+          width={200}
+          height={200}
+          src={post?.urlImagen ?? "https://picsum.photos/seed/picsum/200/300"}
           className="flex-shrink-0 object-cover rounded-l-lg aspect-square myimage"
         />
       </div>
 
-      <div className="absolute -bottom-5 flex flex-row justify-between w-full">
+      <div className="absolute flex flex-row justify-between w-full -bottom-5">
         <div className="flex flex-row gap-2">
           <button
             onClick={() => {
@@ -82,7 +89,7 @@ const Post = () => {
             </svg>
             <p className={isLiked === 1 ? "text-blue-700" : "text-white"}>
               {" "}
-              {(post?.Reacciones.likes ?? 0) + (isLiked === 1 ? 1 : 0)}
+              {(post?.Reacciones?.likes ?? 0) + (isLiked === 1 ? 1 : 0)}
             </p>
           </button>
           <button
@@ -107,7 +114,7 @@ const Post = () => {
             </svg>
             <p className={isLiked === -1 ? "text-blue-700" : "text-white"}>
               {" "}
-              {(post?.Reacciones.dislikes ?? 0) + (isLiked === -1 ? 1 : 0)}
+              {(post?.Reacciones?.dislikes ?? 0) + (isLiked === -1 ? 1 : 0)}
             </p>
           </button>
         </div>

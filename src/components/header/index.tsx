@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Search, Menu } from "lucide-react"
+import Logo from "@/components/logo"
 
 const Header = () => {
   return (
@@ -14,11 +15,9 @@ const Header = () => {
         />
       </div>
       <Link href="/">
-        <span className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-          FOCUS
-        </span>
+        <Logo />
       </Link>
-      <div className="flex items-center justify-center w-10 h-10 bg-black border rounded-full border-gray-500/60">
+      <div className="flex items-center justify-center w-10 h-10 border rounded-full border-gray-500/60">
         <Search color="gray" width={18} size={18} />
       </div>
     </header>
