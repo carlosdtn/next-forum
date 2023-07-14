@@ -1,7 +1,6 @@
 import React from "react"
 import { onAuthStateChanged, getAuth } from "firebase/auth"
 import firebase_app from "@/firebase/config"
-import { CredentialsProps } from "@/utils/types"
 
 const auth = getAuth(firebase_app)
 
@@ -9,11 +8,7 @@ export const AuthContext = React.createContext({})
 
 export const useAuthContext = () => React.useContext(AuthContext)
 
-type Props = {
-  children: React.ReactNode
-}
-
-export const AuthContextProvider: React.FC<Props> = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = React.useState(null)
   const [loading, setLoading] = React.useState(true)
 
