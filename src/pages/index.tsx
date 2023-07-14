@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import PostCard from "@/components/cards/post-card"
 import { MOCK_POSTS, MOCK_TAGS } from "@/lib/mock"
 import { useEffect, useState } from "react"
-import getDocument from "@/firebase/getData"
+import getAllDocuments from "@/firebase/getData"
+import { set } from "react-hook-form"
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -18,31 +19,29 @@ export default function Home() {
       setPosts(json.data)
     }
     fetchPosts()
+    fetchCategory()
   }, [])
 
   const fetchCategory = async () => {
-    const { result, error } = await getDocument("Category", "6")
+    const tags = await getAllDocuments("Category")
+    console.log(tags)
+    setTags(tags)
 
-    if (error) {
-      // Manejar el error, por ejemplo, mostrar un mensaje de error o realizar alguna acción de recuperación.
-      console.error("Error al obtener el documento:", error)
-      return
-    }
+    // if (error) {
+    //   console.error("Error al obtener el documento:", error)
+    //   return
+    // }
 
-    if (result?.exists()) {
-      const categoryData = result.data()
-      // Haz algo con los datos de la categoría, como guardarlos en el estado.
-      // Por ejemplo, si tienes un estado llamado `categories`:
-      setTags(categoryData)
-    } else {
-      // El documento no existe.
-      console.log("El documento no existe." + error)
-    }
+    // if (result?.exists()) {
+    //   const categoryData = result.data()
+    //   // Haz algo con los datos de la categoría, como guardarlos en el estado.
+    //   // Por ejemplo, si tienes un estado llamado `categories`:
+    //   setTags(categoryData)
+    // } else {
+    //   // El documento no existe.
+    //   console.log("El documento no existe." + error)
+    // }
   }
-
-  useEffect(() => {
-    fetchCategory()
-  }, [])
 
   return (
     <>
@@ -56,7 +55,7 @@ export default function Home() {
           </Button>
         </div>
         <div className="flex flex-col gap-6">
-          {MOCK_TAGS.map((tag, index) => (
+          {tags.map((tag, index) => (
             <TagSection key={index} loading={false} tag={tag} />
           ))}
         </div>

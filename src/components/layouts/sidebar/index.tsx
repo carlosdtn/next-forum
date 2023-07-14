@@ -1,6 +1,6 @@
 const Sidebar = () => {
   return (
-    <div className="shadow bg-gradient-to-l from-purple-400 to-pink-600 max-w-52">
+    <div className="shadow bg-gradient-to-l from-purple-400 to-pink-600 max-w-52 ">
       <nav className="flex flex-col justify-between h-screen px-2">
         <ul className="flex flex-col gap-1 xl:gap-3 ">
           <li className="box-border flex-1">
