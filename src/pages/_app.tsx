@@ -1,12 +1,9 @@
 import "../global.css"
-import { Inter } from "next/font/google"
-import AppLayout from "@/components/layouts/app-layout/index"
-import AuthLayout from "@/components/layouts/auth-layout/index"
+import AppLayout from "@/components/layouts/app-layout"
+import AuthLayout from "@/components/layouts/auth-layout"
 import { useRouter } from "next/router"
 import type { AppProps } from "next/app"
 import { useEffect, useState } from "react"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Next Forum",
@@ -30,7 +27,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   } else {
     return (
       <html lang="es">
-        <body className={inter.className}>
+        <body>
           {route.includes("auth") ? (
             <AuthLayout>
               <Component {...pageProps} />

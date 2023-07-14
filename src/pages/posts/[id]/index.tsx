@@ -17,19 +17,19 @@ const Post = () => {
   if (post) {
     const days = Math.floor(
       (new Date().getTime() - new Date(post?.fechaCreacion).getTime()) /
-        (1000 * 60 * 60 * 24)
+      (1000 * 60 * 60 * 24)
     )
     timeAgo = rtf.format(-days, "day")
   }
 
   return (
-    <div className="relative flex flex-col w-full gap-3 p-4 border rounded shadow max-w-7xl border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
+    <div className="relative flex flex-col w-full gap-3 p-4 border rounded shadow max-w-7xl border-slate-200 border-slate-700 bg-amber-100">
       <div className="flex flex-row items-center gap-4">
-        <h1 className="text-2xl font-extrabold text-slate-800">
+        <h1 className="text-2xl font-extrabold">
           {" "}
           {post?.Titulo}{" "}
         </h1>
-        <div className="px-4 py-1 text-xs font-light bg-green-500 rounded text-slate-100">
+        <div className="px-4 py-1 text-xs font-light bg-green-500 rounded">
           {post?.Categoria}
         </div>
       </div>
@@ -41,11 +41,11 @@ const Post = () => {
           src={post?.CreadoPor.Avatar ?? "https://i.pravatar.cc/200"}
           className="flex-shrink-0 object-cover rounded-full shadow aspect-square border-slate-700"
         />
-        <p className="text-base text-slate-800">{post?.CreadoPor.Nombre} </p>
-        <p className="text-base italic text-slate-600">{timeAgo} </p>
+        <p className="text-base">{post?.CreadoPor.Nombre} </p>
+        <p className="text-base italic">{timeAgo} </p>
       </div>
       <div className="flex max-h-[500px] overflow-y-auto mb-4 px-4">
-        <p className="text-base font-normal text-slate-800">
+        <p className="text-base font-normal">
           {post?.Contenido}
         </p>
         <Image
@@ -65,7 +65,7 @@ const Post = () => {
             }}
             title="Like this post"
             aria-label="Like this post"
-            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 bg-teal-900 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -90,7 +90,7 @@ const Post = () => {
             }}
             title="Dislike this post"
             aria-label="Dislike this post"
-            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 bg-teal-900 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -116,7 +116,7 @@ const Post = () => {
           }}
           title="Favorite this post"
           aria-label="Favorite this post"
-          className="relative flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 dark:bg-teal-900 sm:p-2 right-6"
+          className="relative flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 bg-teal-900 sm:p-2 right-6"
         >
           <svg
             stroke="currentColor"
