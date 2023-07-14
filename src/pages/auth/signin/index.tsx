@@ -15,8 +15,6 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 const Signin = () => {
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
   const router = useRouter()
   const notifySignIn = () =>
     toast.error("Credenciales incorrectas", { theme: "colored" })
@@ -28,10 +26,9 @@ const Signin = () => {
     e?: BaseSyntheticEvent<object, any, any>
   ) => {
     e?.preventDefault()
-    setEmail(values?.username)
-    setPassword(values?.password)
 
-    const { result, error } = await signIn(email, password)
+    const { result, error } = await signIn(values?.username, values?.password)
+    console.log({ result, error })
 
     if (error) {
       return notifySignIn()
