@@ -30,6 +30,22 @@ const NewPost = () => {
   });
 
   const [isOpen, setIsOpen] = useState(false);
+  const [moderation, setModeration] = useState<{
+    cacheID: string;
+    result: boolean;
+    trackingId: string;
+    adultClassificationScore: number;
+    isImageAdultClassified: boolean;
+    racyClassificationScore: number;
+    isImageRacyClassified: boolean;
+    advancedInfo: string[]
+    status: {
+      code: number;
+      description: string;
+      exception: any;
+    }
+  }>({} as any);
+
   const router = useRouter();
   const file = watch("file");
 
@@ -63,9 +79,11 @@ const NewPost = () => {
         },
       }
     );
-    const json = await res.json();
-    closeModal();
-    router.push("/");
+    const post = await res.json();
+    console.log({ post })
+
+    if (post.isSuccess) router.push(`/`);
+    setModeration(post.moderationImageResult)
   };
 
 
@@ -180,11 +198,55 @@ const NewPost = () => {
                 </form>
 
                 <div className="mt-4"></div>
+
               </div>
             </Transition.Child>
           </div>
         </Dialog>
       </Transition>
+      {moderation?.status?.code && (
+        <div className="mt-4 border-2 rounded-lg border-red-500 py-4 px-3">
+          <h3 className="text-lg font-medium leading-6 text-center text-gray-900">
+            Moderación de imagen
+          </h3>
+          <div className="mt-4">
+            <p className="text-sm font-medium leading-6 text-center text-gray-900">
+              {moderation?.isImageAdultClassified && (
+                <>
+                  <span className="font-bold text-red-500">
+                    Imagen clasificada como adulta
+                  </span>
+                  <br />
+                  <span className="text-gray-500">
+                    Puntaje de clasificación de adulto:
+                  </span>
+                  <br />
+                  <span className="text-red-500 text-lg font-bold">
+                    {Number(moderation?.adultClassificationScore).toFixed(2)}
+                  </span>
+                </>
+              )}
+              <br />
+              <br />
+              {moderation?.isImageRacyClassified && (
+                <>
+                  <span className="font-bold text-red-500">
+                    Imagen clasificada como racy
+                  </span>
+                  <br />
+                  <span className="text-gray-500">
+                    Puntaje de clasificación de racismo:
+                  </span>
+                  <br />
+                  <span className="text-red-500 text-lg font-bold">
+                    {Number(moderation?.racyClassificationScore).toFixed(2)}
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
