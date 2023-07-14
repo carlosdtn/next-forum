@@ -3,7 +3,6 @@ import AppLayout from "@/components/layouts/app-layout"
 import AuthLayout from "@/components/layouts/auth-layout"
 import { useRouter } from "next/router"
 import type { AppProps } from "next/app"
-import { useEffect, useState } from "react"
 import Head from "next/head"
 import { AuthContextProvider } from "@/context/AuthContext"
 
