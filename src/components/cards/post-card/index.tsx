@@ -3,10 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 export interface IPost {
   id: number
-  Categoria: string
-  Contenido: string
-  Titulo: string
-  UrlImagen: string
+  categoria: string
+  contenido: string
+  titulo: string
+  urlImagen: string
   fechaActualizacion: string
   fechaCreacion: string
   CreadoPor: User
@@ -14,8 +14,8 @@ export interface IPost {
   Reacciones: Reacciones
 }
 export interface Comentarios {
-  Contenido: string
-  CreadoPor: User
+  contenido: string
+  creadoPor: User
   fechaCreacion: string
 }
 export interface Reacciones {
@@ -24,8 +24,8 @@ export interface Reacciones {
 }
 export interface User {
   id: number
-  Nombre: string
-  Avatar: string
+  nombre: string
+  avatar: string
 }
 export interface IPostCardProps {
   post: IPost
@@ -33,6 +33,7 @@ export interface IPostCardProps {
 
 const PostCard: React.FC<IPostCardProps> = ({ post }) => {
   const id = post.id
+  console.log({ post })
 
   return (
     <Link href={`/posts/${id}`}>
@@ -44,24 +45,24 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
                 alt="Imagen"
                 width={200}
                 height={200}
-                src={"https://picsum.photos/200"}
+                src={post.urlImagen}
                 className="flex-shrink-0 object-cover rounded-l-lg aspect-square w-28 sm:w-36"
               />
             </div>
             <div className="flex flex-col justify-between w-full py-3 pr-2">
               <div className="w-full">
                 <p className="font-bold word-break-word line-clamp-1">
-                  {post.Titulo}
+                  {post.titulo}
                 </p>
                 <p className="text-sm word-break-word line-clamp-2 sm:line-clamp-3">
-                  {post.Contenido}
+                  {post.contenido}
                 </p>
               </div>
               <a
                 className="mt-1 text-sm underline word-break-word line-clamp-1 text-emerald-700 text-emerald-500"
                 target="_blank"
                 rel="noreferrer"
-                href={post.UrlImagen}
+                href={post.urlImagen}
               >
                 Ver imagen
               </a>
@@ -101,13 +102,10 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
           </div>
         </div>
         <h2 className="text-2xl font-bold prose word-break-word prose-invert">
-          {post.Titulo}
+          {post.titulo}
         </h2>
         <div className="overflow-hidden prose content-mask line-clamp-4 max-h-56 text-ellipsis prose-headings:text-base prose-code:text-xs markdown__content word-break-word prose-emerald prose-invert prose-hr:border-neutral-700">
-          <pre>
-            <code>{"console.log('Hello Developers!');"}</code>
-          </pre>
-          <p>{post.Contenido}</p>
+          <p>{post.contenido}</p>
         </div>
         <div className="flex items-center justify-between w-full mt-2">
           <div className="flex flex-wrap gap-2 mt-2 ">
@@ -117,7 +115,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post }) => {
                 className="flex cursor-pointer select-none items-center whitespace-nowrap rounded-md border-[1px] border-neutral-300 p-2 text-sm transition border-neutral-800 text-neutral-200 bg-emerald-500 bg-teal-900 text-white border-none hover:opacity-80 px-2 py-1 "
                 data-state="closed"
               >
-                {post.Categoria}
+                {post.categoria}
               </span>
             </a>
           </div>

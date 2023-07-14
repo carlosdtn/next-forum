@@ -14,6 +14,7 @@ import TextInput from "@/components/TextInput";
 const schema = yup.object().shape({
   title: yup.string().required("Título es requerido"),
   content: yup.string().required("Contenido es requerido"),
+  category: yup.string().required("Categoría es requerida"),
   file: yup.mixed(),
 });
 
@@ -42,17 +43,18 @@ const NewPost = () => {
 
   const onSubmit = async (data: any) => {
     const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("content", data.content);
+    formData.append("Titulo", data.title);
+    formData.append("Contenido", data.content);
+    formData.append("Categoria", data.category);
     if (data.file?.[0]) {
-      formData.append("file", data.file[0]);
+      formData.append("Imagen", data.file[0]);
     }
 
     const token = window.localStorage.getItem("token");
     const authorizationHeader = token ? `Bearer ${JSON.parse(token)}` : '';
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_KISARAGI_PUBLICATIONS_API}/publications`,
+      `${process.env.NEXT_PUBLIC_NGROK_URL}/Posts/Register`,
       {
         method: "POST",
         body: formData,
@@ -63,8 +65,7 @@ const NewPost = () => {
     );
     const json = await res.json();
     closeModal();
-    console.log(json);
-    router.push("/app");
+    router.push("/");
   };
 
 
@@ -144,6 +145,12 @@ const NewPost = () => {
                     name="content"
                     register={register}
                     errors={errors.content}
+                  />
+                  <TextAreaInput
+                    label="Categoria"
+                    name="category"
+                    register={register}
+                    errors={errors.category}
                   />
                   <FileInput
                     // @ts-ignore
