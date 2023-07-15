@@ -72,7 +72,7 @@ const Sidebar: React.FC<Props> = ({ isOpen }) => {
                   </Button>
                 </li>
                 <li className="box-border flex mt-2 gap-x-2">
-                  <div className="flex items-center justify-center w-12 h-10 border rounded-full bg-slate-300 border-gray">
+                  <div className="flex items-center justify-center w-10 h-10 border rounded-full bg-slate-300 border-gray">
                     <User2 color="gray" />
                   </div>
                   <div className="flex flex-col items-center min-w-0 text-left">

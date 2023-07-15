@@ -5,6 +5,8 @@ import Image from "next/image"
 import { Fragment, useEffect, useState } from "react"
 import { TrashIcon, XIcon } from "lucide-react"
 import { Dialog, Transition } from "@headlessui/react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Post = () => {
   const [isFavorite, setIsFavorite] = useState(false)
@@ -34,14 +36,14 @@ const Post = () => {
   if (post) {
     const days = Math.floor(
       (new Date().getTime() - new Date(post?.fechaCreacion).getTime()) /
-      (1000 * 60 * 60 * 24)
+        (1000 * 60 * 60 * 24)
     )
     timeAgo = rtf.format(-days, "day")
   }
 
   const deletePost = async (id: number) => {
     const token = window.localStorage.getItem("token")
-    const authorizationHeader = token ? `Bearer ${JSON.parse(token)}` : ''
+    const authorizationHeader = token ? `Bearer ${JSON.parse(token)}` : ""
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NGROK_URL}/Posts/${id}`,
       {
@@ -53,11 +55,14 @@ const Post = () => {
     )
     const post = await res.json()
     console.log({ post })
-    if (post.isSuccess) router.push(`/`)
+    if (post.isSuccess) {
+      router.push(`/`)
+      toast.success("Post eliminado con éxito", { theme: "colored" })
+    }
   }
 
   return (
-    <div className="flex flex-col relative gap-3 shadow p-4 w-full max-w-7xl border border-slate-200 bg-slate-100rounded">
+    <div className="relative flex flex-col w-full gap-3 p-4 border shadow max-w-7xl border-slate-200 bg-slate-100rounded">
       <div className="flex flex-row items-center gap-4">
         <h1 className="text-2xl font-extrabold"> {post?.titulo} </h1>
         <div className="px-4 py-1 text-xs font-light bg-green-500 rounded">
@@ -94,7 +99,7 @@ const Post = () => {
             }}
             title="Like this post"
             aria-label="Like this post"
-            className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -119,7 +124,7 @@ const Post = () => {
             }}
             title="Dislike this post"
             aria-label="Dislike this post"
-            className="flex gap-2  rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2"
+            className="flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 sm:p-2"
           >
             <svg
               stroke="currentColor"
@@ -146,7 +151,7 @@ const Post = () => {
             }}
             title="Favorite this post"
             aria-label="Favorite this post"
-            className="flex gap-2 rounded bg-emerald-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2 relative right-6"
+            className="relative flex gap-2 px-2 py-1 rounded shadow-lg bg-emerald-500 hover:opacity-80 sm:p-2 right-6"
           >
             <svg
               stroke="currentColor"
@@ -165,7 +170,7 @@ const Post = () => {
             onClick={() => setIsOpen(true)}
             title="Delete this post"
             aria-label="Delete this post"
-            className="flex gap-2 rounded bg-red-500 px-2 py-1 shadow-lg hover:opacity-80 sm:p-2 relative right-6"
+            className="relative flex gap-2 px-2 py-1 bg-red-500 rounded shadow-lg hover:opacity-80 sm:p-2 right-6"
           >
             <TrashIcon fill="white" stroke="white" />
           </button>

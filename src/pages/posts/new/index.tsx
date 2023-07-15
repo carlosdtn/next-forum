@@ -1,23 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, Transition } from "@headlessui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { XIcon } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import FileInput from "@/components/FileInput";
-import TextAreaInput from "@/components/TextAreaInput";
-import TextInput from "@/components/TextInput";
+import { Button } from "@/components/ui/button"
+import { Dialog, Transition } from "@headlessui/react"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { XIcon } from "lucide-react"
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { Fragment, useState } from "react"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
+import FileInput from "@/components/FileInput"
+import TextAreaInput from "@/components/TextAreaInput"
+import TextInput from "@/components/TextInput"
 
 const schema = yup.object().shape({
   title: yup.string().required("Título es requerido"),
   content: yup.string().required("Contenido es requerido"),
   category: yup.string().required("Categoría es requerida"),
   file: yup.mixed(),
-});
-
+})
 
 const NewPost = () => {
   const {
@@ -27,47 +26,47 @@ const NewPost = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
-  });
+  })
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const [moderation, setModeration] = useState<{
-    cacheID: string;
-    result: boolean;
-    trackingId: string;
-    adultClassificationScore: number;
-    isImageAdultClassified: boolean;
-    racyClassificationScore: number;
-    isImageRacyClassified: boolean;
+    cacheID: string
+    result: boolean
+    trackingId: string
+    adultClassificationScore: number
+    isImageAdultClassified: boolean
+    racyClassificationScore: number
+    isImageRacyClassified: boolean
     advancedInfo: string[]
     status: {
-      code: number;
-      description: string;
-      exception: any;
+      code: number
+      description: string
+      exception: any
     }
-  }>({} as any);
+  }>({} as any)
 
-  const router = useRouter();
-  const file = watch("file");
+  const router = useRouter()
+  const file = watch("file")
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   const onSubmit = async (data: any) => {
-    const formData = new FormData();
-    formData.append("Titulo", data.title);
-    formData.append("Contenido", data.content);
-    formData.append("Categoria", data.category);
+    const formData = new FormData()
+    formData.append("Titulo", data.title)
+    formData.append("Contenido", data.content)
+    formData.append("Categoria", data.category)
     if (data.file?.[0]) {
-      formData.append("Imagen", data.file[0]);
+      formData.append("Imagen", data.file[0])
     }
 
-    const token = window.localStorage.getItem("token");
-    const authorizationHeader = token ? `Bearer ${JSON.parse(token)}` : '';
+    const token = window.localStorage.getItem("token")
+    const authorizationHeader = token ? `Bearer ${JSON.parse(token)}` : ""
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NGROK_URL}/Posts/Register`,
@@ -78,14 +77,14 @@ const NewPost = () => {
           Authorization: authorizationHeader,
         },
       }
-    );
-    const post = await res.json();
+    )
+    const post = await res.json()
     console.log({ post })
 
-    if (post.isSuccess) router.push(`/`);
+    if (post.isSuccess) router.push(`/`)
+    closeModal()
     setModeration(post.moderationImageResult)
-  };
-
+  }
 
   return (
     <>
@@ -198,14 +197,13 @@ const NewPost = () => {
                 </form>
 
                 <div className="mt-4"></div>
-
               </div>
             </Transition.Child>
           </div>
         </Dialog>
       </Transition>
       {moderation?.status?.code && (
-        <div className="mt-4 border-2 rounded-lg border-red-500 py-4 px-3">
+        <div className="px-3 py-4 mt-4 border-2 border-red-500 rounded-lg">
           <h3 className="text-lg font-medium leading-6 text-center text-gray-900">
             Moderación de imagen
           </h3>
@@ -221,7 +219,7 @@ const NewPost = () => {
                     Puntaje de clasificación de adulto:
                   </span>
                   <br />
-                  <span className="text-red-500 text-lg font-bold">
+                  <span className="text-lg font-bold text-red-500">
                     {Number(moderation?.adultClassificationScore).toFixed(2)}
                   </span>
                 </>
@@ -238,7 +236,7 @@ const NewPost = () => {
                     Puntaje de clasificación de racismo:
                   </span>
                   <br />
-                  <span className="text-red-500 text-lg font-bold">
+                  <span className="text-lg font-bold text-red-500">
                     {Number(moderation?.racyClassificationScore).toFixed(2)}
                   </span>
                 </>
@@ -248,7 +246,7 @@ const NewPost = () => {
         </div>
       )}
     </>
-  );
+  )
 }
 
 export default NewPost
